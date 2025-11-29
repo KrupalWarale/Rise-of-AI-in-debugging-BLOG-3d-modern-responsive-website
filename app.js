@@ -125,60 +125,54 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Comment System
-    const commentInput = document.querySelector('.comment-input');
-    const commentSendBtn = document.querySelector('.comment-send-btn');
-    const commentsList = document.querySelector('.comments-list');
-    const commentsCount = document.querySelector('.comments-count');
-
-    function addNewComment() {
-        const commentText = commentInput.value.trim();
-        if (!commentText) return;
-
-        // Create comment element
-        const commentElement = document.createElement('div');
-        commentElement.className = 'comment-item';
-        commentElement.innerHTML = `
-            <div class="comment-meta">
-                <span class="comment-author">You</span>
-                <span class="comment-time">now</span>
-            </div>
-            <div class="comment-bubble">
-                ${commentText}
-            </div>
-        `;
-
-        // Add to top of list
-        commentsList.insertBefore(commentElement, commentsList.firstChild);
-
-        // Update count
-        const currentCount = parseInt(commentsCount.textContent.split(' ')[0]);
-        commentsCount.textContent = `${currentCount + 1} comments`;
-
-        // Clear input
-        commentInput.value = '';
-
-        // Animate in
-        commentElement.style.opacity = '0';
-        commentElement.style.transform = 'translateY(-20px)';
-        setTimeout(() => {
-            commentElement.style.transition = 'all 0.3s ease';
-            commentElement.style.opacity = '1';
-            commentElement.style.transform = 'translateY(0)';
-        }, 10);
-    }
-
-    // Event listeners
-    if (commentSendBtn) {
-        commentSendBtn.addEventListener('click', addNewComment);
-    }
-
-    if (commentInput) {
-        commentInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                addNewComment();
-            }
-        });
-    }
+    // Initialize chapter stats on homepage
+    initializeChapterStats();
 })
 
+
+// Chapter Stats Functionality
+function initializeChapterStats() {
+    if (typeof chapterDB === 'undefined') return;
+    
+    const chapterCards = document.querySelectorAll('.chapter-card');
+    const allStats = chapterDB.getAllChapterStats();
+    
+    chapterCards.forEach((card, index) => {
+        const chapterNumber = index + 1;
+        const chapterId = `chapter${chapterNumber}`;
+        const stats = allStats[chapterId];
+        
+        if (stats) {
+            // Create stats element
+            const statsHTML = `
+                <div class="chapter-stats">
+                    <div class="chapter-likes">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                        <span>${stats.likes}</span>
+                    </div>
+                    <div class="chapter-comments">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                        <span>${stats.comments.length}</span>
+                    </div>
+                </div>
+            `;
+            
+            // Append to chapter card
+            card.insertAdjacentHTML('beforeend', statsHTML);
+        }
+    });
+}
+
+// Update stats when returning from chapter page
+window.addEventListener('focus', () => {
+    // Refresh stats when user returns to homepage
+    setTimeout(() => {
+        const existingStats = document.querySelectorAll('.chapter-stats');
+        existingStats.forEach(stat => stat.remove());
+        initializeChapterStats();
+    }, 100);
+});
