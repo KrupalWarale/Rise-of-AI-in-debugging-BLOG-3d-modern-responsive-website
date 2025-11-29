@@ -1195,7 +1195,7 @@ header ul a:hover {
 /* iPad Portrait Orientation */
 @media screen and (max-width: 1024px) and (min-width: 768px) and (orientation: portrait) {
     .skills-section {
-        padding: 60px 0 120px 0;
+        padding: 60px 0 200px 0;
     }
 
     .skills-box {
@@ -1221,12 +1221,17 @@ header ul a:hover {
     .topic-card p {
         font-size: 0.8rem;
     }
+
+    /* Increase gap from slider significantly for iPad Portrait */
+    .slider {
+        margin-top: 300px !important;
+    }
 }
 
 /* iPad Landscape Orientation */
 @media screen and (max-width: 1366px) and (min-width: 1024px) and (orientation: landscape) {
     .skills-section {
-        padding: 80px 0 200px 0;
+        padding: 80px 0 250px 0;
     }
 
     .skills-box {
@@ -1256,6 +1261,11 @@ header ul a:hover {
 
     .topic-card p {
         font-size: 0.9rem;
+    }
+
+    /* Increase gap from slider significantly for iPad Landscape */
+    .slider {
+        margin-top: 280px !important;
     }
 }
 
@@ -1382,9 +1392,9 @@ header ul a:hover {
         z-index: 1 !important;
     }
 
-    /* Add spacing from slider below */
+    /* Add significant spacing from slider below */
     .slider {
-        margin-top: 150px !important;
+        margin-top: 250px !important;
         clear: both;
     }
 
