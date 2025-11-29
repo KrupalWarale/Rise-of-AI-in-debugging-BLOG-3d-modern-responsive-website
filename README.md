@@ -2,7 +2,7 @@
 
 A modern web project exploring the evolution and future of AI-powered debugging tools.
 
-<br>
+
 <br>
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1e19fa2b-740b-4be2-9f33-87664b34462c" />
 
@@ -42,5 +42,6 @@ A modern web project exploring the evolution and future of AI-powered debugging 
 
 
 Created by Krupal Warale
+
 
 
