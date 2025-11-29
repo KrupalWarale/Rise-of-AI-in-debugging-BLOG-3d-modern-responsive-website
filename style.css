@@ -1015,51 +1015,86 @@ header ul a:hover {
         gap: 15px;
     }
 
-    /* iPad Skills Section Fix */
+    /* iPad Keypoints Section - 2x2 Grid Layout */
     .skills-box {
-        height: 80vh;
-        padding: 20px;
+        height: auto;
+        min-height: 70vh;
+        padding: 40px 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto;
+        gap: 25px;
+        align-items: center;
+        justify-items: center;
+        position: relative;
     }
 
     .skills-image {
-        width: 50%;
-        max-width: 400px;
+        grid-column: 1 / -1;
+        grid-row: 2;
+        width: 300px;
+        max-width: 300px;
+        opacity: 0.4;
+        z-index: 1;
+        justify-self: center;
     }
 
     .topic-card {
-        max-width: 250px;
-        padding: 20px;
-        backdrop-filter: none;
-        background: rgba(0, 0, 0, 0.85);
-        border: 2px solid rgba(114, 161, 222, 0.7);
+        position: relative !important;
+        max-width: 280px;
+        width: 100%;
+        padding: 25px;
+        background: rgba(0, 0, 0, 0.9) !important;
+        backdrop-filter: none !important;
+        border: 2px solid rgba(114, 161, 222, 0.8);
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+        z-index: 2;
+        transition: all 0.3s ease;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+    }
+
+    .topic-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 15px 35px rgba(114, 161, 222, 0.4);
+        border-color: rgba(114, 161, 222, 1);
     }
 
     .topic-card.top-left {
-        top: 15%;
-        left: 3%;
+        grid-column: 1;
+        grid-row: 1;
     }
 
     .topic-card.top-right {
-        top: 15%;
-        right: 3%;
+        grid-column: 2;
+        grid-row: 1;
     }
 
     .topic-card.bottom-left {
-        bottom: 15%;
-        left: 3%;
+        grid-column: 1;
+        grid-row: 3;
     }
 
     .topic-card.bottom-right {
-        bottom: 15%;
-        right: 3%;
+        grid-column: 2;
+        grid-row: 3;
     }
 
     .topic-card h3 {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        color: #72a1de;
+        text-align: center;
     }
 
     .topic-card p {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #e0e0e0;
+        text-align: center;
     }
 
     /* Footer iPad Fix */
@@ -1127,7 +1162,106 @@ header ul a:hover {
     }
 }
 
+/* iPad Portrait Orientation */
+@media screen and (max-width: 1024px) and (min-width: 768px) and (orientation: portrait) {
+    .skills-box {
+        min-height: 80vh;
+        padding: 30px 15px;
+        gap: 20px;
+    }
 
+    .skills-image {
+        width: 250px;
+        max-width: 250px;
+    }
+
+    .topic-card {
+        max-width: 260px;
+        padding: 20px;
+    }
+
+    .topic-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .topic-card p {
+        font-size: 0.9rem;
+    }
+}
+
+/* iPad Landscape Orientation */
+@media screen and (max-width: 1366px) and (min-width: 1024px) and (orientation: landscape) {
+    .skills-box {
+        min-height: 60vh;
+        padding: 50px 30px;
+        gap: 30px;
+    }
+
+    .skills-image {
+        width: 320px;
+        max-width: 320px;
+    }
+
+    .topic-card {
+        max-width: 300px;
+        padding: 30px;
+    }
+
+    .topic-card h3 {
+        font-size: 1.5rem;
+    }
+
+    .topic-card p {
+        font-size: 1rem;
+    }
+}
+
+/* Small Tablets (like iPad Mini) */
+@media screen and (max-width: 820px) and (min-width: 701px) {
+    .skills-box {
+        min-height: 75vh;
+        padding: 25px 15px;
+        gap: 18px;
+    }
+
+    .skills-image {
+        width: 220px;
+        max-width: 220px;
+    }
+
+    .topic-card {
+        max-width: 240px;
+        padding: 18px;
+    }
+
+    .topic-card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 12px;
+    }
+
+    .topic-card p {
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+}
+
+/* Tablet Specific Adjustments */
+@media screen and (max-width: 1200px) and (min-width: 701px) {
+    /* Ensure no blur effects on keypoints cards */
+    .topic-card {
+        filter: none !important;
+        backdrop-filter: none !important;
+    }
+    
+    /* Make sure cards are always visible over brain image */
+    .skills-box .topic-card {
+        z-index: 10 !important;
+    }
+    
+    .skills-box .skills-image {
+        z-index: 1 !important;
+    }
+}
 
 @media screen and (max-width: 700px) {
 
@@ -1395,6 +1529,8 @@ header ul a:hover {
         opacity: 1 !important;
         filter: none !important;
         width: 100%;
+        grid-template-columns: none !important;
+        grid-template-rows: none !important;
     }
 
     .skills-image {
