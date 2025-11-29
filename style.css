@@ -1015,25 +1015,33 @@ header ul a:hover {
         gap: 15px;
     }
 
-    /* iPad Keypoints Section - Brain as Background with 2x2 Grid */
+    /* iPad Keypoints Section - Clean 2x2 Grid with Proper Spacing */
+    .skills-section {
+        padding: 80px 0 150px 0;
+        margin: 0;
+        width: 100%;
+        overflow: hidden;
+    }
+    
     .skills-box {
         position: relative;
-        width: 100%;
-        height: 80vh;
-        min-height: 600px;
-        padding: 40px;
-        margin-bottom: 100px;
+        width: 90%;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 60px 40px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 50px 40px;
+        align-items: stretch;
+        justify-items: stretch;
         background-image: url('images/digital brain (2).png');
         background-size: 400px 400px;
         background-position: center center;
         background-repeat: no-repeat;
-        background-opacity: 0.2;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        gap: 40px;
-        align-items: center;
-        justify-items: center;
+        background-attachment: local;
+        border-radius: 20px;
+        box-sizing: border-box;
     }
 
     .skills-box::before {
@@ -1050,6 +1058,7 @@ header ul a:hover {
         opacity: 0.2;
         z-index: 1;
         pointer-events: none;
+        border-radius: 20px;
     }
 
     .skills-image {
@@ -1059,25 +1068,29 @@ header ul a:hover {
     .topic-card {
         position: relative !important;
         width: 100%;
-        max-width: 300px;
+        max-width: none;
         padding: 25px;
         background: rgba(0, 0, 0, 0.9) !important;
         backdrop-filter: none !important;
         filter: none !important;
         border: 2px solid rgba(114, 161, 222, 0.8);
-        border-radius: 15px;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
         z-index: 10;
         transition: all 0.3s ease;
         top: auto !important;
         left: auto !important;
         right: auto !important;
         bottom: auto !important;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .topic-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 35px rgba(114, 161, 222, 0.4);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(114, 161, 222, 0.3);
         border-color: rgba(114, 161, 222, 1);
     }
 
@@ -1102,17 +1115,19 @@ header ul a:hover {
     }
 
     .topic-card h3 {
-        font-size: 1.3rem;
-        margin-bottom: 15px;
+        font-size: 1.2rem;
+        margin-bottom: 12px;
         color: #72a1de;
         text-align: center;
+        line-height: 1.3;
     }
 
     .topic-card p {
-        font-size: 0.9rem;
-        line-height: 1.6;
+        font-size: 0.85rem;
+        line-height: 1.5;
         color: #e0e0e0;
         text-align: center;
+        margin: 0;
     }
 
     /* Footer iPad Fix */
@@ -1182,100 +1197,125 @@ header ul a:hover {
 
 /* iPad Portrait Orientation */
 @media screen and (max-width: 1024px) and (min-width: 768px) and (orientation: portrait) {
+    .skills-section {
+        padding: 60px 0 120px 0;
+    }
+    
     .skills-box {
-        height: 90vh;
-        min-height: 700px;
-        padding: 30px;
-        gap: 30px;
-        margin-bottom: 80px;
+        width: 85%;
+        padding: 50px 30px;
+        gap: 40px 30px;
         background-size: 350px 350px;
     }
 
     .skills-box::before {
         background-size: 350px 350px;
+        opacity: 0.25;
     }
 
     .topic-card {
-        max-width: 280px;
         padding: 22px;
     }
 
     .topic-card h3 {
-        font-size: 1.2rem;
+        font-size: 1.15rem;
     }
 
     .topic-card p {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
 }
 
 /* iPad Landscape Orientation */
 @media screen and (max-width: 1366px) and (min-width: 1024px) and (orientation: landscape) {
+    .skills-section {
+        padding: 100px 0 180px 0;
+    }
+    
     .skills-box {
-        height: 70vh;
-        min-height: 500px;
-        padding: 50px;
-        gap: 50px;
-        margin-bottom: 100px;
+        width: 95%;
+        max-width: 1000px;
+        padding: 70px 50px;
+        gap: 60px 50px;
         background-size: 450px 450px;
     }
 
     .skills-box::before {
         background-size: 450px 450px;
+        opacity: 0.25;
     }
 
     .topic-card {
-        max-width: 320px;
-        padding: 28px;
+        padding: 30px;
     }
 
     .topic-card h3 {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
     }
 
     .topic-card p {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
     }
 }
 
 /* Small Tablets (like iPad Mini) */
 @media screen and (max-width: 820px) and (min-width: 701px) {
+    .skills-section {
+        padding: 50px 0 100px 0;
+    }
+    
     .skills-box {
-        height: 75vh;
-        min-height: 550px;
-        padding: 25px;
-        gap: 25px;
-        margin-bottom: 70px;
+        width: 80%;
+        padding: 40px 25px;
+        gap: 30px 25px;
         background-size: 300px 300px;
     }
 
     .skills-box::before {
         background-size: 300px 300px;
+        opacity: 0.2;
     }
 
     .topic-card {
-        max-width: 250px;
         padding: 20px;
     }
 
     .topic-card h3 {
         font-size: 1.1rem;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
     }
 
     .topic-card p {
-        font-size: 0.8rem;
-        line-height: 1.5;
+        font-size: 0.75rem;
+        line-height: 1.4;
     }
 }
 
 /* Tablet Specific Adjustments */
 @media screen and (max-width: 1200px) and (min-width: 701px) {
+    /* Completely remove ALL blur effects on tablets */
+    * {
+        filter: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        text-shadow: none !important;
+    }
+    
     /* Ensure no blur effects on keypoints cards */
     .topic-card {
         filter: none !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
+    }
+    
+    .topic-card h3 {
+        text-shadow: none !important;
+        filter: none !important;
+    }
+    
+    .topic-card p {
+        text-shadow: none !important;
+        filter: none !important;
     }
     
     /* Remove any blur from skills section */
@@ -1284,9 +1324,47 @@ header ul a:hover {
         backdrop-filter: none !important;
     }
     
+    .skills-section * {
+        filter: none !important;
+        backdrop-filter: none !important;
+        text-shadow: none !important;
+    }
+    
+    /* Remove blur from section title */
+    .section-title {
+        filter: none !important;
+        backdrop-filter: none !important;
+        text-shadow: none !important;
+    }
+    
     .skills-box {
         filter: none !important;
         backdrop-filter: none !important;
+    }
+    
+    /* Disable autoBlur animations completely */
+    .autoBlur,
+    .autoBlur *,
+    .autoDisplay,
+    .autoDisplay * {
+        animation: none !important;
+        filter: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        text-shadow: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    
+    /* Ensure fadein-left animation doesn't add blur */
+    .fadein-left,
+    .fadein-left * {
+        animation: none !important;
+        filter: none !important;
+        backdrop-filter: none !important;
+        text-shadow: none !important;
+        opacity: 1 !important;
+        transform: none !important;
     }
     
     /* Make sure cards are always visible over brain image */
@@ -1300,7 +1378,14 @@ header ul a:hover {
     
     /* Add spacing from slider below */
     .slider {
+        margin-top: 80px !important;
+        clear: both;
+    }
+    
+    /* Ensure proper section spacing */
+    .my-project {
         margin-top: 100px !important;
+        clear: both;
     }
 }
 
@@ -2178,7 +2263,7 @@ header ul a:hover {
 }
 
 .skills-box {
-    gap: 30px;
+    gap: 180px;
     /* Optimized gap */
 }
 
