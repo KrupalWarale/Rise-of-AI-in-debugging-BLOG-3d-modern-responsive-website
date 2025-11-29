@@ -48,92 +48,99 @@
                 <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Natural Language Processing" class="content-image">
                 <div class="image-caption">Teaching computers to understand human language in code</div>
                 
-                <p>NLP is the bridge between how we think about code and how machines process it. While traditional tools just see syntax, NLP-powered debugging tools understand intent, context, and meaning. Let's explore how this changes everything.</p>
+                <p>Code isn't just instructions for computers - it's communication between humans. Variable names, function names, comments, documentation - they're all written in human language. NLP helps AI systems understand this human side of programming, making debugging tools that actually get what you're trying to accomplish.</p>
                 
-                <h3 style="color: #72a1de; margin-top: 40px;">Code as Language</h3>
-                <p>Here's a mind-bender: code is actually a form of human language. We use meaningful names, write comments, and structure our logic in ways that make sense to other humans. NLP taps into this linguistic nature of programming.</p>
+                <h3 style="color: #72a1de; margin-top: 40px;">Why Language Matters in Code</h3>
+                <p>Think about it - when you see a function called `calculateUserAge()`, you immediately know what it should do. But traditional debugging tools just see it as a sequence of characters. NLP bridges that gap, helping AI understand the intent behind your code.</p>
                 
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-number">78%</div>
-                        <div class="stat-label">Better Bug Context</div>
+                        <div class="stat-number">40%</div>
+                        <div class="stat-label">Of Code is Comments & Names</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">80%</div>
+                        <div class="stat-label">Bugs Found via Semantic Analysis</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number">65%</div>
-                        <div class="stat-label">Improved Fix Suggestions</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">40+</div>
-                        <div class="stat-label">Programming Languages Supported</div>
+                        <div class="stat-label">Improvement in Bug Descriptions</div>
                     </div>
                 </div>
                 
+                <h3 style="color: #72a1de; margin-top: 40px;">How NLP Reads Your Code</h3>
+                
                 <div class="highlight-box">
-                    <div class="highlight-title">What NLP Reads in Your Code</div>
+                    <div class="highlight-title">NLP Techniques for Code Analysis</div>
                     <ul>
-                        <li><strong>Variable Names:</strong> Understanding what data represents</li>
-                        <li><strong>Function Names:</strong> Grasping what operations do</li>
-                        <li><strong>Comments:</strong> Learning developer intentions</li>
-                        <li><strong>Error Messages:</strong> Interpreting what went wrong</li>
-                        <li><strong>Documentation:</strong> Connecting code to specifications</li>
+                        <li><strong>Tokenization:</strong> Breaking code into meaningful chunks</li>
+                        <li><strong>Semantic Analysis:</strong> Understanding what names and comments mean</li>
+                        <li><strong>Intent Recognition:</strong> Figuring out what code is supposed to do</li>
+                        <li><strong>Context Understanding:</strong> Relating code to its documentation</li>
                     </ul>
                 </div>
                 
-                <h3 style="color: #72a1de; margin-top: 40px;">Understanding Intent vs Implementation</h3>
-                <p>The magic happens when NLP can spot the gap between what you meant to do and what your code actually does. It's like having a colleague who can read your mind and point out when your implementation doesn't match your intentions.</p>
+                <h4 style="color: #72a1de; margin-top: 30px;">Reading Between the Lines</h4>
+                <p>NLP doesn't just read your code - it understands the story you're telling. Here's how it works:</p>
                 
                 <div class="code-block">
 <pre>
-// NLP can understand this mismatch:
-function calculateAverage(numbers) {
-    // Comment says "calculate average"
-    let sum = 0;
-    for (let i = 0; i < numbers.length; i++) {
-        sum += numbers[i];
+// NLP can understand this function's purpose from its name and comments
+function validateEmailAddress(email) {
+    // Check if email contains @ symbol
+    if (!email.includes('@')) {
+        return false; // NLP knows this means invalid
     }
-    // But code returns sum, not average!
-    return sum; // NLP flags: "Did you forget to divide by length?"
+    
+    // Verify domain part exists
+    const parts = email.split('@');
+    return parts[1].length > 0; // NLP understands the validation logic
+}
+
+// NLP flags this as suspicious - name doesn't match behavior
+function validateEmailAddress(email) {
+    return email.length * 2; // This doesn't validate anything!
 }
 </pre>
                 </div>
                 
-                <h4 style="color: #72a1de; margin-top: 30px;">Semantic Analysis in Action</h4>
-                <p>NLP doesn't just read words - it understands relationships, context, and meaning. When you name a variable "userCount" but use it to store user objects, NLP catches that semantic mismatch.</p>
+                <h3 style="color: #72a1de; margin-top: 40px;">Semantic Bug Detection</h3>
+                <p>The coolest part about NLP in debugging? It can spot bugs that are technically correct but semantically wrong. Your code might run without errors, but if it doesn't match what the function name promises, NLP will catch it.</p>
                 
                 <table class="content-table">
                     <thead>
                         <tr>
-                            <th>NLP Technique</th>
-                            <th>What It Does</th>
-                            <th>Debugging Benefit</th>
+                            <th>Bug Type</th>
+                            <th>How NLP Detects It</th>
+                            <th>Example</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>Named Entity Recognition</strong></td>
-                            <td>Identifies variables, functions, classes</td>
-                            <td>Spots naming inconsistencies</td>
+                            <td><strong>Name-Behavior Mismatch</strong></td>
+                            <td>Compares function names with actual behavior</td>
+                            <td>Function named "sort" that doesn't sort</td>
                         </tr>
                         <tr>
-                            <td><strong>Sentiment Analysis</strong></td>
-                            <td>Understands comment tone and urgency</td>
-                            <td>Prioritizes TODO items and warnings</td>
+                            <td><strong>Comment-Code Drift</strong></td>
+                            <td>Checks if comments match what code does</td>
+                            <td>Comment says "add" but code subtracts</td>
                         </tr>
                         <tr>
-                            <td><strong>Semantic Similarity</strong></td>
-                            <td>Compares meaning across code sections</td>
-                            <td>Finds duplicate logic with different names</td>
+                            <td><strong>Inconsistent Naming</strong></td>
+                            <td>Finds variables with similar purpose but different names</td>
+                            <td>userID vs user_id in same function</td>
                         </tr>
                         <tr>
-                            <td><strong>Intent Classification</strong></td>
-                            <td>Determines what code is trying to achieve</td>
-                            <td>Suggests better implementations</td>
+                            <td><strong>Missing Documentation</strong></td>
+                            <td>Identifies complex functions without explanations</td>
+                            <td>Complex algorithm with no comments</td>
                         </tr>
                     </tbody>
                 </table>
                 
-                <h3 style="color: #72a1de; margin-top: 40px;">Error Message Translation</h3>
-                <p>We've all seen cryptic error messages that make no sense. NLP is changing that by translating technical jargon into plain English explanations that actually help.</p>
+                <h3 style="color: #72a1de; margin-top: 40px;">Understanding Error Messages</h3>
+                <p>We've all seen cryptic error messages that make no sense. NLP is changing that by translating technical jargon into plain English explanations.</p>
                 
                 <div class="comparison-table">
                     <div class="comparison-column">
@@ -146,111 +153,98 @@ function calculateAverage(numbers) {
                         </ul>
                     </div>
                     <div class="comparison-column">
-                        <div class="comparison-title">NLP-Enhanced Explanations</div>
+                        <div class="comparison-title">NLP-Enhanced Messages</div>
                         <ul class="comparison-list">
-                            <li>"You're trying to use a variable that's null"</li>
-                            <li>"Your program accessed invalid memory"</li>
-                            <li>"The object you're accessing doesn't exist"</li>
-                            <li>"You're trying to access an array element that doesn't exist"</li>
+                            <li>"You're trying to use a variable that doesn't exist"</li>
+                            <li>"Your program accessed memory it shouldn't have"</li>
+                            <li>"The object you're trying to use is empty or missing"</li>
+                            <li>"You're asking for item #10 in a list that only has 5 items"</li>
                         </ul>
                     </div>
                 </div>
                 
-                <div class="info-box success">
-                    <div class="info-box-title">Real Impact: GitHub Copilot</div>
-                    <p>GitHub Copilot uses NLP to understand code context and suggest completions. It reads your comments and variable names to generate code that matches your intent, reducing bugs from the start.</p>
-                </div>
-                
                 <h3 style="color: #72a1de; margin-top: 40px;">Code Documentation Analysis</h3>
-                <p>NLP can read your documentation and compare it to your actual code implementation. When they don't match, you get a heads up that something might be wrong.</p>
+                <p>NLP can read your documentation and compare it with your actual code. If there's a mismatch, it'll flag it. This is huge for maintaining large codebases where documentation often gets out of sync.</p>
+                
+                <div class="info-box success">
+                    <div class="info-box-title">Real Example: Microsoft's IntelliCode</div>
+                    <p>Microsoft's IntelliCode uses NLP to understand code context and provide better suggestions. It reads your comments, understands your naming patterns, and suggests completions that match your coding style and intent.</p>
+                </div>
+                
+                <h4 style="color: #72a1de; margin-top: 30px;">Advanced NLP Techniques</h4>
                 
                 <div class="timeline-item-content">
-                    <div class="timeline-year">Documentation Parsing</div>
-                    <p>NLP reads function descriptions, parameter explanations, and return value documentation.</p>
+                    <div class="timeline-year">Word Embeddings</div>
+                    <p>Converting code tokens into numerical vectors that capture semantic meaning. Similar concepts end up close together in vector space.</p>
                 </div>
                 
                 <div class="timeline-item-content">
-                    <div class="timeline-year">Code Analysis</div>
-                    <p>Analyzes actual function behavior, parameter usage, and return patterns.</p>
+                    <div class="timeline-year">Transformer Models</div>
+                    <p>Using attention mechanisms to understand relationships between different parts of code, even when they're far apart.</p>
                 </div>
                 
                 <div class="timeline-item-content">
-                    <div class="timeline-year">Consistency Check</div>
-                    <p>Compares documented behavior with actual implementation to find mismatches.</p>
+                    <div class="timeline-year">Code-Text Alignment</div>
+                    <p>Matching code behavior with natural language descriptions to detect inconsistencies.</p>
                 </div>
                 
-                <div class="timeline-item-content">
-                    <div class="timeline-year">Intelligent Suggestions</div>
-                    <p>Provides specific recommendations to align code with documentation or vice versa.</p>
-                </div>
-                
-                <h3 style="color: #72a1de; margin-top: 40px;">Multi-Language Understanding</h3>
-                <p>Modern NLP systems can work across different programming languages, understanding that a "list" in Python is similar to an "array" in JavaScript, even though they're implemented differently.</p>
+                <h3 style="color: #72a1de; margin-top: 40px;">Multilingual Code Understanding</h3>
+                <p>Modern development teams are global, and so is their code. NLP systems now understand comments and documentation in multiple languages, making debugging tools accessible worldwide.</p>
                 
                 <div class="chart-container">
-                    <div class="chart-title">NLP Accuracy Across Programming Languages</div>
+                    <div class="chart-title">NLP Processing Pipeline</div>
                     <div style="text-align: left; margin-top: 20px;">
-                        <div style="margin: 10px 0;">Python</div>
+                        <div style="margin: 10px 0;">Text Extraction</div>
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 94%;">
-                                <div class="progress-label">94% Accuracy</div>
+                            <div class="progress-fill" style="width: 25%;">
+                                <div class="progress-label">Comments & Names</div>
                             </div>
                         </div>
                         
-                        <div style="margin: 10px 0;">JavaScript</div>
+                        <div style="margin: 10px 0;">Tokenization</div>
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 91%;">
-                                <div class="progress-label">91% Accuracy</div>
+                            <div class="progress-fill" style="width: 50%;">
+                                <div class="progress-label">Break into Words</div>
                             </div>
                         </div>
                         
-                        <div style="margin: 10px 0;">Java</div>
+                        <div style="margin: 10px 0;">Semantic Analysis</div>
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 89%;">
-                                <div class="progress-label">89% Accuracy</div>
+                            <div class="progress-fill" style="width: 75%;">
+                                <div class="progress-label">Understand Meaning</div>
                             </div>
                         </div>
                         
-                        <div style="margin: 10px 0;">C++</div>
+                        <div style="margin: 10px 0;">Intent Matching</div>
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 85%;">
-                                <div class="progress-label">85% Accuracy</div>
+                            <div class="progress-fill" style="width: 100%;">
+                                <div class="progress-label">Compare with Behavior</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <h3 style="color: #72a1de; margin-top: 40px;">Context-Aware Debugging</h3>
-                <p>NLP doesn't just look at individual lines of code - it understands the broader context. It knows when you're working with user authentication, data processing, or UI rendering, and tailors its suggestions accordingly.</p>
+                <h3 style="color: #72a1de; margin-top: 40px;">Challenges and Limitations</h3>
+                <p>NLP isn't perfect. It can be confused by sarcastic comments, misleading variable names, or code that's intentionally obfuscated. But it's getting better every day as models learn from more diverse codebases.</p>
                 
                 <div class="video-container">
                     <div class="video-placeholder">
-                        Demo: NLP Reading Code Comments
-                        <div class="video-source">Watch AI understand developer intentions</div>
+                        Demo: NLP Analyzing Code Comments
+                        <div class="video-source">Watch AI understand the intent behind your code</div>
                     </div>
                 </div>
                 
-                <h4 style="color: #72a1de; margin-top: 30px;">Smart Code Completion</h4>
-                <p>When NLP understands what you're trying to build, it can suggest not just syntactically correct code, but semantically meaningful completions that fit your specific use case.</p>
-                
-                <div class="info-box">
-                    <div class="info-box-title">Pro Tip</div>
-                    <p>Write better comments and use descriptive variable names. NLP-powered tools get smarter when they have more context to work with. Your future self will thank you too!</p>
-                </div>
-                
-                <h3 style="color: #72a1de; margin-top: 40px;">Challenges and Future Directions</h3>
-                <p>NLP in code analysis is still evolving. It sometimes struggles with domain-specific jargon, sarcastic comments, or code that's intentionally obfuscated. But it's getting better fast.</p>
-                
                 <div class="info-box warning">
-                    <div class="info-box-title">Current Limitations</div>
-                    <p>NLP works best with well-documented, clearly written code. Legacy codebases with minimal comments or cryptic variable names can be challenging for current systems to understand fully.</p>
+                    <div class="info-box-title">Remember</div>
+                    <p>NLP works best when your code is well-documented and uses meaningful names. Garbage in, garbage out - if your variable names are cryptic, even the smartest AI will struggle to help.</p>
                 </div>
                 
-                <p>The future of NLP in debugging is exciting. We're moving toward systems that can have actual conversations about your code, understand complex requirements, and even help with architectural decisions. Imagine describing a bug in plain English and having your IDE understand exactly what you mean.</p>
+                <h3 style="color: #72a1de; margin-top: 40px;">The Future of Code Communication</h3>
+                <p>We're moving toward a world where the barrier between human language and code disappears. Soon, you'll be able to describe what you want in plain English, and AI will not only write the code but also debug it and explain what it does.</p>
                 
                 <div class="info-box">
-                    <div class="info-box-title">Coming Up</div>
-                    <p>NLP helps computers understand what your code means. Next, we'll explore how AI takes this understanding and automatically fixes the bugs it finds - no human intervention required.</p>
+                    <div class="info-box-title">Coming Up Next</div>
+                    <p>NLP helps AI understand what your code should do. But what happens when AI can actually fix the problems it finds? Next, we'll explore automated bug fixing - where AI doesn't just find bugs, it fixes them too.</p>
                 </div>
             </div>
 

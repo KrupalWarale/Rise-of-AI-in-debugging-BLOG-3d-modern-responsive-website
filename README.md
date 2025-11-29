@@ -2,9 +2,6 @@
 
 A modern web project exploring the evolution and future of AI-powered debugging tools.
 
-<img width="1920" height="1080" alt="{FF758659-61EC-40ED-8732-4CF3E978CE13}" src="https://github.com/user-attachments/assets/bda2dc5e-00cd-4b90-a08b-252113c9d452" />
-
-
 ## Features
 
 - Interactive timeline of AI debugging evolution
@@ -35,6 +32,5 @@ A modern web project exploring the evolution and future of AI-powered debugging 
 - AOS (Animate On Scroll) library
 
 ## Author
-
 
 Created by Krupal Warale

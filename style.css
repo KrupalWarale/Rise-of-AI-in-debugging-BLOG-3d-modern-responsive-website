@@ -4,23 +4,33 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     color: lightgray;
     overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
 }
 
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px;
     overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
 }
 
 .container {
     position: relative;
     width: 100%;
+    max-width: 100vw;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 60px;
     overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 .back-vid {
@@ -61,8 +71,16 @@ header.navbar-hidden {
 }
 
 .left img {
-    width: 40px;
-    margin: 0 15px;
+    width: 120px;
+    height: 120px;
+    margin: 0 25px;
+    object-fit: contain;
+    /* Make white background transparent */
+    background: transparent;
+    mix-blend-mode: screen;
+    filter: contrast(1.3) brightness(0.9) saturate(1.2);
+    /* Alternative approach - remove white background */
+    /* mix-blend-mode: multiply; */
 }
 
 
@@ -617,23 +635,26 @@ header ul a:hover {
     display: flex;
     align-items: start;
     justify-content: center;
-    mix-blend-mode: lighten;
-    opacity: 0.7;
+    mix-blend-mode: normal;
+    opacity: 1;
 }
 
 .skills-image {
     width: 70%;
-    mix-blend-mode: difference;
+    mix-blend-mode: normal;
+    opacity: 0.3;
 }
 
 .topic-card {
     position: absolute;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.8);
     padding: 25px;
     border-radius: 15px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(114, 161, 222, 0.2);
+    backdrop-filter: none;
+    border: 2px solid rgba(114, 161, 222, 0.6);
     max-width: 300px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 .topic-card h3 {
@@ -870,21 +891,21 @@ header ul a:hover {
 /* AUTO DISPLAY ANIMAION */
 .autoDisplay {
     opacity: 1;
-    filter: blur(0);
+    filter: none;
     transform: scale(1);
     animation: autoDisplayAnimation 1.5s ease-out forwards;
 }
 
 @keyframes autoDisplayAnimation {
     from {
-        filter: blur(10px);
+        filter: none;
         transform: translateY(-50px) scale(0.8);
         opacity: 0;
     }
 
     to {
         opacity: 1;
-        filter: blur(0px);
+        filter: none;
         transform: translateY(0) scale(1);
     }
 }
@@ -913,6 +934,8 @@ header ul a:hover {
     }
 }
 
+
+
 @media (max-aspect-ratio: 16/9) {
     .back-vid {
         width: auto;
@@ -928,7 +951,8 @@ header ul a:hover {
 }
 
 
-@media screen and (max-width: 1200px) {
+/* iPad and Tablet Responsive Design */
+@media screen and (max-width: 1200px) and (min-width: 769px) {
     .blackhole-video {
         margin-top: -20%;
     }
@@ -959,6 +983,76 @@ header ul a:hover {
     .chapters-grid {
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 15px;
+    }
+
+    /* iPad Skills Section Fix */
+    .skills-box {
+        height: 80vh;
+        padding: 20px;
+    }
+
+    .skills-image {
+        width: 50%;
+        max-width: 400px;
+    }
+
+    .topic-card {
+        max-width: 250px;
+        padding: 20px;
+        backdrop-filter: none;
+        background: rgba(0, 0, 0, 0.85);
+        border: 2px solid rgba(114, 161, 222, 0.7);
+    }
+
+    .topic-card.top-left {
+        top: 15%;
+        left: 3%;
+    }
+
+    .topic-card.top-right {
+        top: 15%;
+        right: 3%;
+    }
+
+    .topic-card.bottom-left {
+        bottom: 15%;
+        left: 3%;
+    }
+
+    .topic-card.bottom-right {
+        bottom: 15%;
+        right: 3%;
+    }
+
+    .topic-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .topic-card p {
+        font-size: 0.9rem;
+    }
+
+    /* Footer iPad Fix */
+    .footer-content {
+        padding-left: 0;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .footer-left {
+        flex: 1;
+        min-width: 250px;
+    }
+
+    .footer-center {
+        flex: 1;
+        min-width: 200px;
+    }
+
+    .footer-right {
+        flex: 1;
+        min-width: 200px;
+        justify-content: flex-end;
     }
 
     .timeline-container {
@@ -1001,15 +1095,20 @@ header ul a:hover {
     .timeline-card {
         max-width: 100%;
     }
-
-
 }
 
 @media screen and (max-width: 700px) {
+
+    /* Override absolute positioning for mobile */
+    .skills-section .topic-card {
+        position: static !important;
+    }
+
     header {
         position: fixed;
         height: 60px;
         padding: 0 20px;
+        z-index: 1000;
     }
 
     header ul {
@@ -1044,13 +1143,24 @@ header ul a:hover {
 
     .autoBlur {
         animation: none;
+        filter: none !important;
     }
 
+    .autoDisplay {
+        animation: none !important;
+        filter: none !important;
+        opacity: 1 !important;
+        transform: scale(1) !important;
+    }
+
+    /* Hero Section Mobile Fix - Make "Rise of AI" visible */
     .hero {
         flex-direction: column;
         padding: 80px 20px 40px;
         height: auto;
-        min-height: 80vh;
+        min-height: 100vh;
+        justify-content: center;
+        align-items: center;
     }
 
     .hero-info {
@@ -1059,55 +1169,83 @@ header ul a:hover {
         bottom: auto;
         text-align: center;
         width: 100%;
+        z-index: 10;
+        background: transparent;
+        padding: 30px 20px;
+        border-radius: 0;
+        backdrop-filter: none;
+        margin-bottom: 20px;
     }
 
     .hero-info h1 {
-        font-size: 32px;
-        line-height: 38px;
+        font-size: 28px;
+        line-height: 34px;
         margin: 20px 0;
+        color: #ffffff;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.8);
     }
 
     .hero-info p {
         font-size: 16px;
         max-width: 100%;
+        color: #e0e0e0;
+        text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.7);
+    }
+
+    .hero-info button {
+        margin-top: 20px;
+        padding: 12px 30px;
+        font-size: 16px;
     }
 
     .scroll-down {
-        bottom: 10px;
+        bottom: 20px;
         left: 50%;
         transform: translateX(-50%);
+        z-index: 10;
     }
 
+    /* Show hero video on mobile */
     .hero .skills-video-box {
+        display: block;
         position: relative;
         right: auto;
-        height: 200px;
+        height: 250px;
         width: 100%;
         margin-top: 20px;
+        border-radius: 15px;
+        overflow: hidden;
     }
 
     .skills-video {
-        height: 200px;
+        height: 250px;
         width: 100%;
         object-fit: cover;
+        border-radius: 15px;
     }
 
     .container {
         gap: 40px;
+        overflow-x: hidden;
     }
 
     .my-project {
         margin-bottom: 40px;
-        width: 90%;
+        width: 95%;
+        padding: 0 10px;
     }
 
     .chapters-grid {
         grid-template-columns: 1fr;
         gap: 15px;
+        width: 100%;
     }
 
     .chapter-card {
         padding: 20px;
+        margin: 0;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .chapter-card .chapter-number {
@@ -1120,6 +1258,7 @@ header ul a:hover {
 
     .timeline-section {
         width: 95%;
+        padding: 0 10px;
     }
 
     .timeline-container {
@@ -1176,35 +1315,88 @@ header ul a:hover {
         padding: 4px 10px;
     }
 
-    .topic-card.top-left,
-    .topic-card.bottom-left {
-        left: 5%;
-        max-width: 90%;
-    }
-
-    .topic-card.top-right,
-    .topic-card.bottom-right {
-        right: 5%;
-        max-width: 90%;
-    }
-
-    .topic-card.top-left {
-        top: 15%;
-    }
-
-    .topic-card.bottom-left {
-        top: 50%;
-    }
-
-    .topic-card h3 {
-        font-size: 1.3rem;
-        margin-bottom: 10px;
+    /* Key Points Section Mobile Fix - Stack cards vertically */
+    .skills-section {
+        padding: 40px 0;
+        filter: none !important;
     }
 
     .skills-box {
         height: auto;
-        min-height: 80vh;
-        padding: 20px 0;
+        min-height: auto;
+        padding: 20px 10px;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 25px;
+        position: relative;
+        mix-blend-mode: normal !important;
+        opacity: 1 !important;
+        filter: none !important;
+        width: 100%;
+    }
+
+    .skills-image {
+        width: 60%;
+        max-width: 250px;
+        order: 1;
+        margin: 0 auto 20px auto;
+        display: block;
+        background: transparent;
+        mix-blend-mode: normal;
+        opacity: 0.4;
+    }
+
+    .topic-card {
+        position: static !important;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        max-width: 95%;
+        width: 95%;
+        margin: 0 auto 20px auto;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.9);
+        backdrop-filter: none !important;
+        border: 2px solid rgba(114, 161, 222, 0.8);
+        border-radius: 15px;
+        box-sizing: border-box;
+        filter: none !important;
+        mix-blend-mode: normal !important;
+        display: block;
+    }
+
+    .skills-section .topic-card.top-left {
+        order: 2;
+        position: static !important;
+    }
+
+    .skills-section .topic-card.top-right {
+        order: 3;
+        position: static !important;
+    }
+
+    .skills-section .topic-card.bottom-left {
+        order: 4;
+        position: static !important;
+    }
+
+    .skills-section .topic-card.bottom-right {
+        order: 5;
+        position: static !important;
+    }
+
+    .topic-card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        color: #72a1de;
+    }
+
+    .topic-card p {
+        font-size: 0.9rem;
+        line-height: 1.5;
     }
 
     .slider {
@@ -1217,29 +1409,49 @@ header ul a:hover {
         width: 70%;
     }
 
+    /* Footer Mobile Fix */
     .footer {
         font-size: 12px;
-        padding: 25px 20px;
+        padding: 25px 15px;
         min-height: 100px;
+        margin-top: 40px;
     }
 
     .footer-content {
         flex-direction: column;
-        gap: 20px;
+        gap: 15px;
         text-align: center;
+        padding-left: 0;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .footer-left {
+        width: 100%;
     }
 
     .footer-left h1 {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
+        line-height: 1.3;
+        margin-bottom: 5px;
     }
 
     .footer-subtitle {
         font-size: 0.8rem;
     }
 
+    .footer-center {
+        width: 100%;
+    }
+
     .created-by {
-        font-size: 1rem;
+        font-size: 0.95rem;
         margin: 10px 0;
+    }
+
+    .footer-right {
+        width: 100%;
+        justify-content: center;
     }
 
     .footer-github span {
@@ -1254,9 +1466,15 @@ header ul a:hover {
 
 @media screen and (max-width: 480px) {
 
+    /* Keep hero video visible on small mobile */
     .hero .skills-video-box {
-        display: none;
+        display: block;
+        height: 200px;
+        margin-top: 15px;
+    }
 
+    .skills-video {
+        height: 200px;
     }
 
     .blackhole-box {
@@ -1266,69 +1484,124 @@ header ul a:hover {
 
     .blackhole-video {
         width: 100%;
-        margin-top: -27%;
+        margin-top: -25%;
     }
 
     .left {
-        scale: 0.9;
-        margin-left: -30px;
+        transform: scale(0.95);
+        margin-left: -20px;
     }
 
     .left h2 {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .hero {
-        scale: 0.9;
+        transform: scale(1);
+        padding: 70px 15px 30px;
+        min-height: 90vh;
     }
 
     .hero-info {
-        bottom: 15%;
+        padding: 25px 15px;
+        margin-bottom: 15px;
     }
 
     .hero-info h1 {
-        font-size: 35px;
+        font-size: 24px;
+        line-height: 30px;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.8);
+    }
+
+    .hero-info p {
+        font-size: 14px;
+        text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 0, 0, 0.7);
     }
 
     .scroll-down {
-        bottom: 15%;
-        left: 60%;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
     }
 
     .section-title {
-        font-size: 25px;
+        font-size: 22px;
+        text-align: center;
+        padding: 0 10px;
+    }
+
+    /* Fix skills section for very small screens */
+    .skills-section {
+        padding: 30px 0;
     }
 
     .skills-box {
-        height: 120vh;
-        margin-right: 30px;
+        height: auto;
+        margin: 0;
+        padding: 15px;
+        flex-direction: column;
+    }
+
+    .skills-image {
+        width: 90%;
+        max-width: 250px;
+    }
+
+    .topic-card {
+        margin: 8px 0;
+        padding: 15px;
+        filter: none !important;
+        backdrop-filter: none !important;
+        mix-blend-mode: normal !important;
+    }
+
+    .topic-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .topic-card p {
+        font-size: 0.85rem;
     }
 
     .slider {
-        bottom: 0%;
+        bottom: 5%;
+        right: 5%;
+        width: 90%;
+    }
+
+    .my-project {
+        width: 95%;
+        padding: 0 5px;
+    }
+
+    .chapters-grid {
+        gap: 10px;
+    }
+
+    .chapter-card {
+        padding: 15px;
     }
 
     .footer {
-        padding: 20px 15px;
-        min-height: 90px;
+        padding: 20px 10px;
+        min-height: 80px;
     }
 
     .footer-left h1 {
-        font-size: 1rem;
-        max-width: 200px;
-        line-height: 1.3;
+        font-size: 0.95rem;
+        line-height: 1.2;
     }
 
     .footer-subtitle {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
     }
 
     .created-by {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 
     .footer-content {
-        gap: 15px;
+        gap: 12px;
     }
 
 
@@ -1472,34 +1745,144 @@ header ul a:hover {
     font-size: 0.95rem;
 }
 
-/* Responsive Design for Chapters */
+/* Tablet and Desktop Chapter Navigation - Keep Horizontal */
+@media (min-width: 769px) {
+    .chapter-navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px 0;
+        border-top: 1px solid rgba(114, 161, 222, 0.3);
+        flex-direction: row;
+    }
+
+    .nav-btn {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 25px;
+        background: linear-gradient(45deg, #72a1de, #4a7bc8);
+        color: white;
+        text-decoration: none;
+        border-radius: 25px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        cursor: pointer;
+        width: auto;
+    }
+}
+
+/* Mobile and Tablet Responsive Design for Chapters */
 @media (max-width: 768px) {
     .chapter-content {
-        margin: 100px 20px 30px;
-        padding: 0 15px;
+        margin: 80px 15px 30px;
+        padding: 0 10px;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .chapter-header {
+        padding: 30px 0;
     }
 
     .chapter-header h1 {
         font-size: 2rem;
+        line-height: 1.2;
+        word-wrap: break-word;
+    }
+
+    .chapter-subtitle {
+        font-size: 1.1rem;
     }
 
     .chapter-body {
-        padding: 25px;
+        padding: 20px;
+        margin-bottom: 30px;
+        overflow-x: hidden;
+    }
+
+    .chapter-body p {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .chapter-navigation {
-        flex-direction: column;
-        gap: 15px;
+        flex-direction: row;
+        gap: 10px;
+        padding: 20px 0;
+        justify-content: space-between;
+        flex-wrap: wrap;
     }
 
     .nav-btn {
-        width: 100%;
+        width: auto;
+        min-width: 100px;
         justify-content: center;
+        padding: 12px 15px;
+        font-size: 12px;
+        flex: 1;
+        max-width: 150px;
     }
 
     .chapters-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 15px;
+    }
+
+    /* Fix content images and tables on mobile */
+    .content-image {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .content-table {
+        font-size: 0.8rem;
+        overflow-x: auto;
+        display: block;
+        white-space: nowrap;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .comparison-table {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .highlight-box {
+        padding: 15px;
+        margin: 15px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .chapter-content {
+        margin: 70px 10px 20px;
+        padding: 0 5px;
+    }
+
+    .chapter-header h1 {
+        font-size: 1.6rem;
+    }
+
+    .chapter-subtitle {
+        font-size: 1rem;
+    }
+
+    .chapter-body {
+        padding: 15px;
+        font-size: 0.95rem;
+    }
+
+    .nav-btn {
+        padding: 10px 12px;
+        font-size: 11px;
+        min-width: 80px;
+        flex: 1;
     }
 }
 
@@ -1613,7 +1996,8 @@ header ul a:hover {
     align-items: center;
 }
 
-.like-btn, .dislike-btn {
+.like-btn,
+.dislike-btn {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -1629,7 +2013,8 @@ header ul a:hover {
     backdrop-filter: blur(10px);
 }
 
-.like-btn:hover, .dislike-btn:hover {
+.like-btn:hover,
+.dislike-btn:hover {
     border-color: rgba(114, 161, 222, 0.6);
     background: rgba(114, 161, 222, 0.1);
     transform: translateY(-2px);
@@ -1648,7 +2033,8 @@ header ul a:hover {
     color: #f44336;
 }
 
-.like-icon, .dislike-icon {
+.like-icon,
+.dislike-icon {
     width: 20px;
     height: 20px;
     transition: all 0.3s ease;
@@ -1667,9 +2053,17 @@ header ul a:hover {
 }
 
 @keyframes clickPulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 /* Comments Section */
@@ -1794,9 +2188,20 @@ header ul a:hover {
 }
 
 @keyframes successPulse {
-    0% { transform: scale(1); background: linear-gradient(45deg, #5DADE2, #3498DB); }
-    50% { transform: scale(1.2); background: linear-gradient(45deg, #4CAF50, #45a049); }
-    100% { transform: scale(1); background: linear-gradient(45deg, #5DADE2, #3498DB); }
+    0% {
+        transform: scale(1);
+        background: linear-gradient(45deg, #5DADE2, #3498DB);
+    }
+
+    50% {
+        transform: scale(1.2);
+        background: linear-gradient(45deg, #4CAF50, #45a049);
+    }
+
+    100% {
+        transform: scale(1);
+        background: linear-gradient(45deg, #5DADE2, #3498DB);
+    }
 }
 
 /* Comments List */
@@ -1818,6 +2223,7 @@ header ul a:hover {
         opacity: 0;
         transform: translateY(-10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -1968,6 +2374,7 @@ header ul a:hover {
         opacity: 0;
         transform: translateY(-5px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -1988,7 +2395,8 @@ header ul a:hover {
     border-top: 1px solid rgba(114, 161, 222, 0.2);
 }
 
-.chapter-likes, .chapter-comments {
+.chapter-likes,
+.chapter-comments {
     display: flex;
     align-items: center;
     gap: 5px;
@@ -1996,7 +2404,8 @@ header ul a:hover {
     color: #999;
 }
 
-.chapter-likes svg, .chapter-comments svg {
+.chapter-likes svg,
+.chapter-comments svg {
     width: 16px;
     height: 16px;
 }
@@ -2007,80 +2416,85 @@ header ul a:hover {
         padding: 25px 20px;
         margin: 30px 0;
     }
-    
+
     .comments-title {
         font-size: 1.5rem;
     }
-    
+
     .comment-input-container {
         gap: 12px;
     }
-    
-    .username-input, .comment-input {
+
+    .username-input,
+    .comment-input {
         padding: 8px 14px;
         font-size: 13px;
     }
-    
+
     .comment-input {
         padding-right: 45px;
     }
-    
+
     .comment-send-btn {
         width: 28px;
         height: 28px;
         right: 5px;
     }
-    
+
     .comment-send-btn svg {
         width: 14px;
         height: 14px;
     }
-    
+
     .delete-comment-btn {
         width: 18px;
         height: 18px;
         top: 6px;
         right: 6px;
     }
-    
+
     .delete-comment-btn svg {
         width: 10px;
         height: 10px;
     }
-    
+
     .interaction-buttons {
         gap: 15px;
     }
-    
-    .like-btn, .dislike-btn {
+
+    .like-btn,
+    .dislike-btn {
         padding: 10px 16px;
         font-size: 14px;
     }
-    
-    .like-icon, .dislike-icon {
+
+    .like-icon,
+    .dislike-icon {
         width: 18px;
         height: 18px;
     }
-    
+
     .comment-meta {
         padding-right: 35px;
     }
-    
+
     .comment-delete-btn {
         width: 24px;
         height: 24px;
     }
-    
+
     .comment-delete-btn svg {
         width: 14px;
         height: 14px;
     }
-}ound: rgba(255, 255, 255, 0.05);
-    padding: 25px;
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(114, 161, 222, 0.2);
-    margin: 25px 0;
+}
+
+ound: rgba(255, 255, 255, 0.05);
+padding: 25px;
+border-radius: 15px;
+backdrop-filter: blur(10px);
+border: 1px solid rgba(114, 161, 222, 0.2);
+margin: 25px 0;
 }
 
 .like-dislike-section {
@@ -3027,6 +3441,8 @@ anced Smooth Fade Effects */
     }
 }
 
+
+
 /* Enhanced Footer Styles */
 .footer {
     display: flex;
@@ -3149,8 +3565,7 @@ anced Smooth Fade Effects */
 }
 
 /* Mod
-/* Chap
-ter Navigation Styles */
+/* Chapter Navigation Styles - Default Horizontal Layout */
 .chapter-navigation {
     display: flex;
     justify-content: space-between;
@@ -3158,6 +3573,7 @@ ter Navigation Styles */
     margin-top: 40px;
     padding: 20px 0;
     gap: 20px;
+    flex-direction: row;
 }
 
 .nav-btn {
@@ -3224,8 +3640,10 @@ ter Navigation Styles */
 
 @media (max-width: 768px) {
     .chapter-navigation {
-        flex-direction: column;
-        gap: 15px;
+        flex-direction: row;
+        gap: 8px;
+        justify-content: space-between;
+        flex-wrap: wrap;
     }
 
     .nav-btn {
@@ -3270,4 +3688,121 @@ ke chapter cards clickable */
 
 .chapter-card:hover p {
     color: #ffffff;
+}
+
+/* iPad Specific Fixes */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+    /* iPad Portrait and Landscape */
+    .skills-section {
+        padding: 60px 0;
+    }
+
+    .skills-box {
+        height: 70vh;
+        padding: 30px 20px;
+    }
+
+    .skills-image {
+        width: 45%;
+        max-width: 350px;
+    }
+
+    .topic-card {
+        max-width: 280px;
+        padding: 22px;
+        backdrop-filter: none;
+        background: rgba(0, 0, 0, 0.85);
+        border: 2px solid rgba(114, 161, 222, 0.7);
+    }
+
+    .topic-card.top-left {
+        top: 20%;
+        left: 2%;
+    }
+
+    .topic-card.top-right {
+        top: 20%;
+        right: 2%;
+    }
+
+    .topic-card.bottom-left {
+        bottom: 20%;
+        left: 2%;
+    }
+
+    .topic-card.bottom-right {
+        bottom: 20%;
+        right: 2%;
+    }
+
+    .topic-card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 12px;
+    }
+
+    .topic-card p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+
+    /* Footer iPad specific */
+    .footer {
+        padding: 35px 40px;
+    }
+
+    .footer-content {
+        padding-left: 0;
+        max-width: 100%;
+    }
+
+    .footer-left h1 {
+        font-size: 1.3rem;
+    }
+
+    .footer-subtitle {
+        font-size: 0.85rem;
+    }
+
+    .created-by {
+        font-size: 1.05rem;
+    }
+}
+
+/* iPad Landscape Specific */
+@media screen and (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
+    .skills-box {
+        height: 80vh;
+    }
+
+    .topic-card {
+        max-width: 300px;
+    }
+}
+
+/* Prevent horizontal scroll on all devices */
+@media screen and (max-width: 1200px) {
+
+    body,
+    html,
+    .container {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+
+    .hero,
+    .timeline-section,
+    .skills-section,
+    .my-project,
+    .footer {
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+
+    .chapters-grid,
+    .timeline-container,
+    .skills-box {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
 }
